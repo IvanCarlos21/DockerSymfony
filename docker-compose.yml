@@ -1,0 +1,37 @@
+version: '3.6'
+
+services:
+
+  db:
+    image: mysql:latest
+    volumes:
+      - ./db/:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: "symfony"
+      MYSQL_ROOT_PASSWORD: "passw0rd"
+    ports:
+      - 8000:3306
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_ARBITARY: 1
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: "passw0rd"
+    ports:
+      - 8080:80
+    links:
+      - db:db
+  
+  web:
+    build: ./symfony
+    image: symfony5:1.0
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/var/www/html
+    restart: always
+    links:
+      - db:db
