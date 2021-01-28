@@ -28,3 +28,10 @@
 	- Testing email service (MailHog)
 	- Proxy (Traefik)
 	- SSL certificat (Let's Encrypt) :warning: You need a domain name
+
+
+# How to install this in my project?
+
+* Download `symfony` folder and `docker-compose.yml` file and add them to your project
+* Run `docker-compose up` command from your terminal. [(Install docker compose)](https://docs.docker.com/compose/install/)
+
